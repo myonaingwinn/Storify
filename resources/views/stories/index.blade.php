@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Stories') }}</div>
+                <div class="card-header"><span class="font-weight-bold">{{ __('Stories') }}</span>
+                    <a href="{{ route('stories.create') }}" class="btn btn-success btn-sm float-right">New Story</a>
+                </div>
                 <div class="card-body">
                     <table class="table table-striped">
                         <thead>
@@ -20,9 +22,10 @@
                             @foreach ($stories as $story)
                             <tr>
                                 <td>{{$story->title}}</td>
-                                <td>{{$story->type}}</td>
+                                <td class="text-capitalize">{{$story->type}}</td>
                                 <td>{{$story->status==1?'Yes':'No'}}</td>
-                                <td><a href="{{ route('stories.view', [$story]) }}" class="btn btn-secondary btn-sm">View</a>
+                                <td><a href="{{ route('stories.show', [$story]) }}"
+                                        class="btn btn-secondary btn-sm">View</a>
                                 </td>
                             </tr>
                             @endforeach
