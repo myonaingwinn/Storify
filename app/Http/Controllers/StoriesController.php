@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Story;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoryRequest as StyReq;
 
 class StoriesController extends Controller
 {
@@ -37,25 +37,10 @@ class StoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StyReq $request)
     {
-        $data = $request->validate([
-            'title' => 'required',
-            'type' => 'required',
-            'body' => 'required',
-            'status' => 'required',
-        ]);
+        auth()->user()->Stories()->create($request->all());
 
-        auth()->user()->Stories()->create($data);
-
-        /* auth()->user()->Stories()->create([
-            "title" => $request->title,
-            "body" => $request->body,
-            "type" => $request->type,
-            "status" => $request->status,
-            "user_id" => Auth()->user()->id,
-        ]); */
-        // dd($request->all());
         return redirect()->route('stories.index')->with('status', 'Story has been created successfully.');
     }
 
@@ -92,16 +77,10 @@ class StoriesController extends Controller
      * @param  \App\Story  $story
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Story $story)
+    public function update(StyReq $request, Story $story)
     {
-        $data = $request->validate([
-            'title' => 'required',
-            'type' => 'required',
-            'body' => 'required',
-            'status' => 'required',
-        ]);
+        $story->update($request->all());
 
-        $story->update($data);
         return redirect()->route('stories.index')->with('status', 'Story has been updated successfully.');
     }
 
