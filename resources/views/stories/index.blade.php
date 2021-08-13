@@ -28,6 +28,12 @@
                                         class="btn btn-secondary btn-sm">View</a>
                                     <a href="{{ route('stories.edit', [$story]) }}"
                                         class="btn btn-secondary btn-sm">Edit</a>
+                                    <form action="{{ route('stories.destroy',[$story]) }}" method="post"
+                                        style="display: inline-block">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach
