@@ -27,7 +27,8 @@ class StoriesController extends Controller
      */
     public function create()
     {
-        return view('stories.create');
+        $story = new Story;
+        return view('stories.create', ['story' => $story]);
     }
 
     /**
@@ -102,7 +103,6 @@ class StoriesController extends Controller
 
         $story->update($data);
         return redirect()->route('stories.index')->with('status', 'Story has been updated successfully.');
-
     }
 
     /**
