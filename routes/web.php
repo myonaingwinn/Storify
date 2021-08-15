@@ -30,3 +30,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::view('who', 'noaccess');
+
+Route::get('admin', function () {
+    echo "You're admin now!";
+})->middleware('admin');
