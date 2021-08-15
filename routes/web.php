@@ -28,3 +28,5 @@ Route::middleware(['auth'])->group(function () {
     // Route::get('/stories/{story}', 'StoriesController@view')->name('stories.view');
     Route::resource('stories', 'StoriesController');
 });
+
+Route::view('who', 'noaccess');
