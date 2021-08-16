@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Story;
 use App\Http\Requests\StoryRequest as StyReq;
+use Illuminate\Support\Facades\Gate;
 
 class StoriesController extends Controller
 {
@@ -65,6 +66,7 @@ class StoriesController extends Controller
      */
     public function edit(Story $story)
     {
+        Gate::authorize('edit-story', $story);
         return view('stories.edit', [
             'story' => $story
         ]);
