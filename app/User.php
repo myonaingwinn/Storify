@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\UserRegisteredEvent;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -37,7 +38,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function stories(){
+    protected $dispatchesEvents = [
+        'created' => UserRegisteredEvent::class,
+    ];
+
+    public function stories()
+    {
         return $this->hasMany(\App\Story::class);
     }
 }
